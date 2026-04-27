@@ -1,6 +1,5 @@
 package com.APPJAVAFSTELEARNINservice;
 
-
 import com.APPJAVAFSTELEARNIN.entity.Utilisateur;
 import com.APPJAVAFSTELEARNIN.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,8 @@ public class UtilisateurService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-
         Utilisateur user = repo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
         return User.builder()
                 .username(user.getEmail())
                 .password(user.getMotDePasse())
@@ -30,11 +27,15 @@ public class UtilisateurService implements UserDetailsService {
                 .build();
     }
 
+    // Retourne l'entité Utilisateur directement
+    public Utilisateur findByEmail(String email) {
+        return repo.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
+    }
+
     // Inscription
     public Utilisateur inscrireNouvelUtilisateur(Utilisateur utilisateur) {
-
         utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
-
         return repo.save(utilisateur);
-    }}
-
+    }
+}
