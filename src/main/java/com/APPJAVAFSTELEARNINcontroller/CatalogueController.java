@@ -1,6 +1,5 @@
 package com.APPJAVAFSTELEARNINcontroller;
 
-
 import com.APPJAVAFSTELEARNINservice.CoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,8 @@ public class CatalogueController {
 
     @GetMapping("/cours")
     public String catalogue(Model model, Pageable pageable) {
-        model.addAttribute("cours", coursService.getCataloguePublic(pageable));
+        model.addAttribute("cours", 
+            coursService.getCataloguePublic(pageable));
         return "catalogue";
     }
 
@@ -24,5 +24,5 @@ public class CatalogueController {
     public String detail(@PathVariable Long id, Model model) {
         model.addAttribute("coursId", id);
         return "cours-detail";
-    }}
-    
+    }
+}
