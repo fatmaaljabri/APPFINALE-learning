@@ -1,6 +1,5 @@
 package com.APPJAVAFSTELEARNINcontroller;
 
-
 import com.APPJAVAFSTELEARNIN.entity.Utilisateur;
 import com.APPJAVAFSTELEARNINservice.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +15,18 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "auth/login";
     }
 
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("user", new Utilisateur());
-        return "register";
+        return "auth/register";
     }
 
     @PostMapping("/register")
     public String register(@ModelAttribute Utilisateur user) {
         utilisateurService.inscrireNouvelUtilisateur(user);
         return "redirect:/login";
-    }}
+    }
+}
