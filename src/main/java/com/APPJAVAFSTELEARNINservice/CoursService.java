@@ -1,14 +1,17 @@
 package com.APPJAVAFSTELEARNINservice;
 
 import com.APPJAVAFSTELEARNIN.entity.Cours;
-import com.APPJAVAFSTELEARNIN.repository.*;
+import com.APPJAVAFSTELEARNIN.repository.CoursRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CoursService {
@@ -20,14 +23,23 @@ public class CoursService {
         return coursRepository.findByActifTrue(pageable);
     }
 
-    public Cours creer(Cours cours, 
-            org.springframework.web.multipart.MultipartFile file) 
-            throws IOException {
+    public List<Cours> findAll() {
+        return coursRepository.findAll();
+    }
+
+    public Cours findById(Long id) {
+        return coursRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cours non trouvé : " + id));
+    }
+
+    public Cours creer(Cours cours, MultipartFile file) throws IOException {
         if (file != null && !file.isEmpty()) {
-            String fileName = System.currentTimeMillis() 
-                + "_" + file.getOriginalFilename();
-            Path path = Paths.get("uploads/" + fileName);
-            Files.write(path, file.getBytes());
+            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            Path uploadDir = Paths.get("uploads");
+            if (!Files.exists(uploadDir)) {
+                Files.createDirectories(uploadDir);
+            }
+            Files.write(uploadDir.resolve(fileName), file.getBytes());
             cours.setImageUrl(fileName);
         }
         cours.setActif(true);
@@ -35,8 +47,22 @@ public class CoursService {
         return coursRepository.save(cours);
     }
 
-    public Cours modifier(Cours cours) {
-        return coursRepository.save(cours);
+    public Cours modifier(Long id, Cours coursModifie, MultipartFile file) throws IOException {
+        Cours existing = findById(id);
+        existing.setTitre(coursModifie.getTitre());
+        existing.setDescription(coursModifie.getDescription());
+        existing.setCategorie(coursModifie.getCategorie());
+        existing.setNiveau(coursModifie.getNiveau());
+        if (file != null && !file.isEmpty()) {
+            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            Path uploadDir = Paths.get("uploads");
+            if (!Files.exists(uploadDir)) {
+                Files.createDirectories(uploadDir);
+            }
+            Files.write(uploadDir.resolve(fileName), file.getBytes());
+            existing.setImageUrl(fileName);
+        }
+        return coursRepository.save(existing);
     }
 
     public void supprimer(Long id) {

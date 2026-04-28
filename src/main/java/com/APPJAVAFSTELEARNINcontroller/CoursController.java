@@ -1,6 +1,5 @@
 package com.APPJAVAFSTELEARNINcontroller;
 
-
 import com.APPJAVAFSTELEARNIN.entity.Cours;
 import com.APPJAVAFSTELEARNINservice.CoursService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,8 @@ public class CoursController {
     private CoursService coursService;
 
     @GetMapping
-    public String list() {
+    public String list(Model model) {
+        model.addAttribute("cours", coursService.findAll());
         return "formateur/cours-list";
     }
 
@@ -30,8 +30,21 @@ public class CoursController {
     @PostMapping("/save")
     public String save(@ModelAttribute Cours cours,
                        @RequestParam("image") MultipartFile file) throws Exception {
-
         coursService.creer(cours, file);
+        return "redirect:/formateur/cours";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("cours", coursService.findById(id));
+        return "formateur/edit-cours";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable Long id,
+                         @ModelAttribute Cours cours,
+                         @RequestParam("image") MultipartFile file) throws Exception {
+        coursService.modifier(id, cours, file);
         return "redirect:/formateur/cours";
     }
 
@@ -39,4 +52,5 @@ public class CoursController {
     public String delete(@PathVariable Long id) {
         coursService.supprimer(id);
         return "redirect:/formateur/cours";
-    }}
+    }
+}
