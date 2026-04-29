@@ -27,13 +27,11 @@ public class UtilisateurService implements UserDetailsService {
                 .build();
     }
 
-    // Retourne l'entité Utilisateur directement
     public Utilisateur findByEmail(String email) {
         return repo.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
     }
 
-    // Inscription
     public Utilisateur inscrireNouvelUtilisateur(Utilisateur utilisateur) {
         utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
         return repo.save(utilisateur);

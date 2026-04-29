@@ -1,6 +1,5 @@
 package com.APPJAVAFSTELEARNINconfig;
 
-
 import com.APPJAVAFSTELEARNIN.entity.*;
 import com.APPJAVAFSTELEARNIN.entity.Role;
 import com.APPJAVAFSTELEARNIN.repository.*;
@@ -15,11 +14,8 @@ public class DataInitializer {
     CommandLineRunner initData(UtilisateurRepository userRepo,
                                CoursRepository coursRepo,
                                PasswordEncoder passwordEncoder) {
-
         return args -> {
-
             if (userRepo.count() == 0) {
-
                 Utilisateur admin = Utilisateur.builder()
                         .nom("Admin")
                         .email("admin@test.com")
@@ -34,8 +30,16 @@ public class DataInitializer {
                         .role(Role.FORMATEUR)
                         .build();
 
+                Utilisateur apprenant = Utilisateur.builder()
+                        .nom("Apprenant")
+                        .email("apprenant@test.com")
+                        .motDePasse(passwordEncoder.encode("1234"))
+                        .role(Role.APPRENANT)
+                        .build();
+
                 userRepo.save(admin);
                 userRepo.save(formateur);
+                userRepo.save(apprenant);
 
                 Cours cours = Cours.builder()
                         .titre("Spring Boot")
