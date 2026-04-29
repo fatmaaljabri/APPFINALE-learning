@@ -1,0 +1,339 @@
+/* =========================================
+   EDULEARN — CUSTOM STYLES
+   ========================================= */
+
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --primary-light: #e0e7ff;
+    --secondary: #06b6d4;
+    --accent: #f59e0b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --dark: #0f172a;
+    --gray: #64748b;
+    --light-gray: #f1f5f9;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -1px rgba(0,0,0,.04);
+    --shadow-lg: 0 10px 25px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --font-main: 'Sora', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+}
+
+/* ===== BASE ===== */
+* { box-sizing: border-box; }
+
+body {
+    font-family: var(--font-body);
+    background: #fafbff;
+    color: var(--dark);
+    line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-main);
+    font-weight: 700;
+}
+
+/* ===== NAVBAR ===== */
+#mainNav {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    padding: 0.75rem 0;
+}
+
+.navbar-brand {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    color: var(--primary) !important;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--gray) !important;
+    transition: color .2s;
+    padding: .5rem 1rem !important;
+}
+.nav-link:hover { color: var(--primary) !important; }
+
+/* ===== BUTTONS ===== */
+.btn {
+    font-family: var(--font-main);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    padding: .5rem 1.25rem;
+    transition: all .2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79,70,229,.3);
+}
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+.btn-outline-primary:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* ===== CARDS ===== */
+.card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform .2s, box-shadow .2s;
+    overflow: hidden;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, #1e1b4b 100%);
+    color: white;
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: rgba(255,255,255,.05);
+    border-radius: 50%;
+    top: -200px; right: -100px;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,.03);
+    border-radius: 50%;
+    bottom: -150px; left: -100px;
+}
+
+/* ===== BADGES NIVEAU ===== */
+.badge-debutant  { background-color: #d1fae5; color: #065f46; }
+.badge-intermediaire { background-color: #fef3c7; color: #92400e; }
+.badge-avance { background-color: #fee2e2; color: #991b1b; }
+
+/* ===== PROGRESS BAR ===== */
+.progress {
+    height: 10px;
+    border-radius: 50px;
+    background: var(--light-gray);
+}
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 50px;
+    transition: width 1s ease;
+}
+
+/* ===== SIDEBAR ESPACE FORMATEUR/APPRENANT ===== */
+.sidebar {
+    background: white;
+    border-right: 1px solid var(--border);
+    min-height: calc(100vh - 65px);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 65px;
+}
+
+.sidebar .nav-link {
+    padding: .65rem 1.5rem !important;
+    border-radius: 0 !important;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.sidebar .nav-link.active {
+    color: var(--primary) !important;
+    background: var(--primary-light);
+    border-left: 3px solid var(--primary);
+}
+
+/* ===== STAT CARDS ===== */
+.stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-card .stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: .5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: var(--font-main);
+    color: var(--primary);
+}
+
+/* ===== QUIZ ===== */
+.question-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color .2s;
+}
+
+.question-card:focus-within {
+    border-color: var(--primary);
+}
+
+.choix-label {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all .2s;
+    margin-bottom: .5rem;
+}
+
+.choix-label:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+input[type="radio"]:checked + .choix-label {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    font-weight: 600;
+}
+
+/* ===== CATALOGUE FILTERS ===== */
+.filter-bar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+/* ===== CERTIFICAT ===== */
+.certificat-container {
+    background: linear-gradient(135deg, #fffbeb, #fff7cd);
+    border: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+}
+
+.certificat-container::before {
+    content: '★';
+    position: absolute;
+    font-size: 8rem;
+    color: var(--accent);
+    opacity: .05;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ===== STARS RATING ===== */
+.stars { color: var(--accent); }
+.star-input label { font-size: 1.5rem; color: #ccc; cursor: pointer; }
+.star-input input:checked ~ label,
+.star-input label:hover,
+.star-input label:hover ~ label { color: var(--accent); }
+
+/* ===== LECONS LISTE ===== */
+.lecon-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: .5rem;
+    background: white;
+    transition: all .2s;
+}
+
+.lecon-item.completee {
+    border-color: var(--success);
+    background: #f0fdf4;
+}
+
+.lecon-item .check-icon {
+    width: 2rem; height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.lecon-item.completee .check-icon {
+    background: var(--success);
+    color: white;
+}
+
+.lecon-item:not(.completee) .check-icon {
+    background: var(--light-gray);
+    color: var(--gray);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: var(--dark);
+    color: rgba(255,255,255,.7);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+    animation: fadeInUp .5s ease forwards;
+}
+
+.animate-delay-1 { animation-delay: .1s; }
+.animate-delay-2 { animation-delay: .2s; }
+.animate-delay-3 { animation-delay: .3s; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .hero { padding: 3rem 0; }
+    .sidebar { position: static; min-height: auto; }
+}

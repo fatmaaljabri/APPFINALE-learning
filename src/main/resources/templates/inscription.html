@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head><title>S'inscrire</title></head>
+<body>
+<main layout:fragment="content">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <div class="mb-3" style="font-size:3rem; color:var(--primary);">
+                            <i class="bi bi-person-plus-fill"></i>
+                        </div>
+                        <h2 class="fw-bold">Créer un compte</h2>
+                    </div>
+
+                    <div th:if="${erreur}" class="alert alert-danger" th:text="${erreur}"></div>
+
+                    <form th:action="@{/auth/inscription}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Prénom</label>
+                                <input type="text" name="prenom" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Nom</label>
+                                <input type="text" name="nom" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Mot de passe</label>
+                            <input type="password" name="motDePasse" class="form-control"
+                                   minlength="6" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Je suis</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check flex-fill border rounded p-3">
+                                    <input class="form-check-input" type="radio"
+                                           name="role" value="APPRENANT" id="apprenant" checked>
+                                    <label class="form-check-label fw-semibold" for="apprenant">
+                                        <i class="bi bi-person-graduation me-1"></i>Apprenant
+                                    </label>
+                                    <div class="text-muted small">Je veux apprendre</div>
+                                </div>
+                                <div class="form-check flex-fill border rounded p-3">
+                                    <input class="form-check-input" type="radio"
+                                           name="role" value="FORMATEUR" id="formateur">
+                                    <label class="form-check-label fw-semibold" for="formateur">
+                                        <i class="bi bi-person-video3 me-1"></i>Formateur
+                                    </label>
+                                    <div class="text-muted small">Je veux enseigner</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2">
+                            <i class="bi bi-person-plus me-2"></i>Créer mon compte
+                        </button>
+                    </form>
+
+                    <hr class="my-4">
+                    <p class="text-center mb-0">
+                        Déjà inscrit ?
+                        <a th:href="@{/auth/connexion}" class="text-primary fw-semibold">Se connecter</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+</body>
+</html>

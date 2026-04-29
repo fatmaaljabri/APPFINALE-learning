@@ -13,7 +13,7 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/apprenant")
 public class ApprenantController {
-
+	
     @Autowired
     private InscriptionService inscriptionService;
 
