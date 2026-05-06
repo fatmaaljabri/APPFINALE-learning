@@ -4,6 +4,6 @@ public enum Role {
 
 	    ADMIN,
 	    FORMATEUR,
-	    PARTICIPANT
+	    PARTICIPANT, APPRENANT
 	}
 
